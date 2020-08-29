@@ -12,76 +12,76 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateStudentDTO } from './dto/student.dto';
+// import { CreateStudentDTO } from './dto/student.dto';
 import { StudentsService } from './students.service';
 
 @Controller('students')
 export class StudentsController {
-  constructor(private studentsService: StudentsService) {}
+  // constructor(private studentsService: StudentsService) {}
 
-  @Get('/')
-  async getStudents(@Res() res) {
-    const students = await this.studentsService.getStudents();
-    return res.status(HttpStatus.OK).json(students);
-  }
+  // @Get('/')
+  // async getStudents(@Res() res) {
+  //   const students = await this.studentsService.getStudents();
+  //   return res.status(HttpStatus.OK).json(students);
+  // }
 
-  @Post('/create')
-  async createStudent(@Res() res, @Body() createStudentDTO: CreateStudentDTO) {
-    const student = await this.studentsService.createStudent(createStudentDTO);
-    return res.status(HttpStatus.CREATED).json({
-      message: 'Student Successfully Created',
-      student,
-    });
-  }
+  // @Post('/create')
+  // async createStudent(@Res() res, @Body() createStudentDTO: CreateStudentDTO) {
+  //   const student = await this.studentsService.createStudent(createStudentDTO);
+  //   return res.status(HttpStatus.CREATED).json({
+  //     message: 'Student Successfully Created',
+  //     student,
+  //   });
+  // }
 
-  @Get('/:studentID')
-  async getStudent(@Res() res, @Param('studentID') studentID) {
-    const student = await this.studentsService.getStudent(studentID);
-    if (!student) throw new NotFoundException('Student Does not exists');
-    return res.status(HttpStatus.OK).json(student);
-  }
+  // @Get('/:studentID')
+  // async getStudent(@Res() res, @Param('studentID') studentID) {
+  //   const student = await this.studentsService.getStudent(studentID);
+  //   if (!student) throw new NotFoundException('Student Does not exists');
+  //   return res.status(HttpStatus.OK).json(student);
+  // }
 
-  @Put('/update')
-  async updateStudent(
-    @Res() res,
-    @Body() createStudentDTO: CreateStudentDTO,
-    @Query('studentID') studentID,
-  ) {
-    const updatedStudent = await this.studentsService.updateStudent(
-      studentID,
-      createStudentDTO,
-    );
-    if (!updatedStudent) throw new NotFoundException('Student Does not exists');
-    return res.status(HttpStatus.OK).json({
-      message: 'Student Updated Successfully',
-      updatedStudent,
-    });
-  }
+  // @Put('/update')
+  // async updateStudent(
+  //   @Res() res,
+  //   @Body() createStudentDTO: CreateStudentDTO,
+  //   @Query('studentID') studentID,
+  // ) {
+  //   const updatedStudent = await this.studentsService.updateStudent(
+  //     studentID,
+  //     createStudentDTO,
+  //   );
+  //   if (!updatedStudent) throw new NotFoundException('Student Does not exists');
+  //   return res.status(HttpStatus.OK).json({
+  //     message: 'Student Updated Successfully',
+  //     updatedStudent,
+  //   });
+  // }
 
-  @Delete('/delete')
-  async deleteStudent(@Res() res, @Query('studentID') studentID) {
-    const studentDeleted = await this.studentsService.deleteStudent(studentID);
-    if (!studentDeleted) throw new NotFoundException('Student Does not exists');
-    return res.status(HttpStatus.OK).json({
-      message: 'Student deleted successfully',
-      studentDeleted,
-    });
-  }
+  // @Delete('/delete')
+  // async deleteStudent(@Res() res, @Query('studentID') studentID) {
+  //   const studentDeleted = await this.studentsService.deleteStudent(studentID);
+  //   if (!studentDeleted) throw new NotFoundException('Student Does not exists');
+  //   return res.status(HttpStatus.OK).json({
+  //     message: 'Student deleted successfully',
+  //     studentDeleted,
+  //   });
+  // }
 
-  @Post('/assign')
-  async assignStudentToCourse(
-    @Res() res,
-    @Query('studentID') studentID,
-    @Query('courseID') courseID,
-  ) {
-    const studentAssigned = await this.studentsService.assignStudentToCourse(
-      studentID,
-      courseID,
-    );
-    if (!studentAssigned)
-      throw new NotFoundException('Student or Course Does not exists');
-    return res.status(HttpStatus.OK).json({
-      message: 'Assigned Course successfully',
-    });
-  }
+  // @Post('/assign')
+  // async assignStudentToCourse(
+  //   @Res() res,
+  //   @Query('studentID') studentID,
+  //   @Query('courseID') courseID,
+  // ) {
+  //   const studentAssigned = await this.studentsService.assignStudentToCourse(
+  //     studentID,
+  //     courseID,
+  //   );
+  //   if (!studentAssigned)
+  //     throw new NotFoundException('Student or Course Does not exists');
+  //   return res.status(HttpStatus.OK).json({
+  //     message: 'Assigned Course successfully',
+  //   });
+  // }
 }
