@@ -11,24 +11,7 @@ import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [configuration]
-    }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-        useFactory: async (configService: ConfigService) => ({
-          ssl: true,
-          type: 'postgres',
-          host: configService.get('HOST'),
-          port: 5432,
-          username: configService.get('USERNAME'),
-          password: configService.get('PASSWORD'),
-          database: configService.get('DATABASE'),
-          entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-          migrations: [__dirname + '/migrations/*{.ts,.js}']
-      }),
-      inject: [ConfigService]
-    }),
+    TypeOrmModule.forRoot(),
     StudentsModule,
     // CoursesModule
   ],
