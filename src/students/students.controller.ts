@@ -12,18 +12,17 @@ import {
   Delete,
 } from '@nestjs/common';
 
-// import { CreateStudentDTO } from './dto/student.dto';
+import { UserDto } from './dto/student.dto';
 import { StudentsService } from './students.service';
 
 @Controller('students')
 export class StudentsController {
-  // constructor(private studentsService: StudentsService) {}
+  constructor(private studentsService: StudentsService) {}
 
-  // @Get('/')
-  // async getStudents(@Res() res) {
-  //   const students = await this.studentsService.getStudents();
-  //   return res.status(HttpStatus.OK).json(students);
-  // }
+  @Get('/')
+  async getStudents(): Promise<UserDto[]> {
+    return this.studentsService.getStudents();
+  }
 
   // @Post('/create')
   // async createStudent(@Res() res, @Body() createStudentDTO: CreateStudentDTO) {
