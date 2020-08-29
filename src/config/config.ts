@@ -1,3 +1,7 @@
-export default () => ({
-  databaseMongodb: process.env.MONGODB_URI || '',
-});
+export enum Configuration {
+  PORT = 'PORT',
+  HOST = 'HOST',
+  USERNAME = 'USERNAME',
+  PASSWORD = 'PASSWORD',
+  DATABASE = 'DATABASE',
+}
