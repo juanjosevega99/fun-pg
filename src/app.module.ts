@@ -5,14 +5,19 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import configuration from './config/config';
 import { StudentsModule } from './students/students.module';
-import { CoursesModule } from './courses/courses.module';
+// import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [configuration]
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-        useFactory: (configService: ConfigService) => ({
+        useFactory: async (configService: ConfigService) => ({
+          ssl: true,
           type: 'postgres',
           host: configService.get('HOST'),
           port: 5432,
@@ -25,7 +30,7 @@ import { CoursesModule } from './courses/courses.module';
       inject: [ConfigService]
     }),
     StudentsModule,
-    CoursesModule
+    // CoursesModule
   ],
   controllers: [AppController],
   providers: [AppService],
