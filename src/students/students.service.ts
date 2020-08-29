@@ -1,22 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
-// import { InjectModel } from '@nestjs/mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
+import { StudentRepository } from './student.repository';
 
-// import { Student } from './interface/student.interface';
 import { UserDto } from './dto/student.dto';
 // import { Course } from 'src/courses/interfaces/course.interface';
 
 @Injectable()
 export class StudentsService {
-  // constructor(
-  //   @InjectModel('Student') private studentModel: Model<Student>,
-  //   // @InjectModel('Course') private courseModel: Model<Course>,
-  // ) {}
+  constructor(
+    @InjectRepository(StudentRepository)
+    private studentModel: StudentRepository,
+  ) {}
 
-  // async getStudents(): Promise<Student[]> {
-  //   const students = await this.studentModel.find();
-  //   return students;
-  // }
+  async getStudents(): Promise<UserDto[]> {
+    const students = await this.studentModel.find();
+    return students;
+  }
 
   // async createStudent(createStudentDTO: CreateStudentDTO): Promise<Student> {
   //   const createdStudent = new this.studentModel(createStudentDTO);
